@@ -32,8 +32,8 @@ print(sumOfNumbers())
 
 //MARK: - 3 . Can combine with normal parameters
 
-func greet(message: String, _ names: String...) {
+func greet(message: String, names: String...) {
     names.forEach { print("\(message) \($0)") }
 }
 
-greet(message: "Good morning", "Alice", "Bob", "Charlie")
+greet(message: "Good morning", names: "Alice", "Bob", "Charlie")

@@ -9,13 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        var attributeString = AttributedString("Hello world")
+        
+        if let range = attributeString.range(of: "world") {
+            attributeString[range].foregroundColor = .blue
+            attributeString[range].font = .boldSystemFont(ofSize: 18)
         }
-        .padding()
+        
+        if let range = attributeString.range(of: "Hello") {
+            attributeString[range].foregroundColor = .red
+        }
+        return Text(attributeString)
     }
 }
 
