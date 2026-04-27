@@ -9,12 +9,18 @@ import UIKit
  
  */
 
-let semaphore = DispatchSemaphore(value: 1)
+var semaphore = DispatchSemaphore(value: 1)
+
+
 
 DispatchQueue.main.async {
     print("Task 1 : Waiting for semaphore")
-    semaphore.wait()
-    print("Task 1 : Accuire semaphore")
+    if semaphore.wait(timeout: .now() + 2) == .success {
+        print("Acquired")
+        semaphore.signal()
+    } else {
+        print("Timeout - avoided deadlock")
+    }
     // Trying to acquire the semahore again without releasing it -> deadlock
     
     print("Task 2 : Waiting again for semaphore")
@@ -24,3 +30,12 @@ DispatchQueue.main.async {
 }
 
 RunLoop.main.run()
+
+
+/*  - We can fix dead-lock by setting the timeOut for semaphore
+ 
+ semahore.wait(timeout: .now() + 5.0)
+
+ 
+ */
+
