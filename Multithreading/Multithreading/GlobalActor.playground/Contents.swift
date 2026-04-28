@@ -36,3 +36,10 @@ class DatabaseManager {
     }
     
 }
+
+
+Task {
+    print("Start")
+    try await Task.sleep(nanoseconds: 1_000_000_000)
+    print("End after 1 second")
+}
